@@ -5,18 +5,19 @@ template <typename type> class List
 {
   private :
 
-  struct Node {
-    Node* next ;
-    Node* prev ;
-    type value ;
+  class Node {
+    public:
+    Node* next=nullptr ;
+    Node* prev=nullptr ;
+    type value=0 ;
 
-    Node(type v) : value(v),next(nullptr),prev(nullptr) {}
+    Node(type v) : next(nullptr),prev(nullptr),value(v) {}
     Node() : next(nullptr),prev(nullptr),value(0) {}
   };
 
-  size_t elCount=0 ;
   Node* head=nullptr ;
   Node* tail=nullptr ;
+  size_t elCount=0 ;
 
   public :
 
@@ -34,7 +35,6 @@ template <typename type> class List
    void Clear() ;
    void PopBack() ;
    void PopFront() ;
-
 };
 
 template <typename type>
@@ -157,13 +157,11 @@ void List<type>::PushFront(const type value)
 
 template <typename type>
 void List<type>::Clear() {
-     Node* temp=head->next ;
-     while(temp!=tail){
-        Node* nextNode=temp->next ;
-        delete temp ;
-        temp=nextNode ;
-        elCount-- ;
+
+     while(elCount!=0) {
+	 PopFront() ;
      }
+
      head->next=tail ;
      tail->prev=head ;
 }
@@ -228,7 +226,18 @@ int main()
   std::cout<<j ;
   List<int> k ;
   k.PopFront() ;
-  std::cout << k ; */
+  k.PushBack(11) ;
+  k.PushBack(12) ;
+   k.PushBack(14) ;
+   k.PopFront() ;
+   std::cout << k ;
+   k.PopFront() ;
+   std::cout << k ;
+   k.PopFront() ;
+   std::cout << k ;
+   k.PopFront() ;
+  std :: cout << k ; */
+
 
   return 1;
 }
